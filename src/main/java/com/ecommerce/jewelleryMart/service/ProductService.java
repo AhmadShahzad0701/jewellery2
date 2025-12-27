@@ -1,6 +1,5 @@
 package com.ecommerce.jewelleryMart.service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ecommerce.jewelleryMart.model.Product;
 import com.ecommerce.jewelleryMart.repository.ProductRepository;
+import com.ecommerce.jewelleryMart.strategy.SortStrategy;
+import com.ecommerce.jewelleryMart.strategy.SortStrategyFactory;
 
 @Service
 public class ProductService {
@@ -43,37 +44,12 @@ public class ProductService {
                     .collect(Collectors.toList());
         }
 
-        if (sort != null && !sort.isEmpty()) {
-            applySorting(products, sort);
+        SortStrategy strategy = SortStrategyFactory.getStrategy(sort);
+        if (strategy != null) {
+            strategy.sort(products);
         }
 
         return products;
-    }
-
-    // ===== SORTING LOGIC =====
-    private void applySorting(List<Product> products, String sort) {
-        switch (sort) {
-            case "priceLowToHigh":
-                products.sort(Comparator.comparingDouble(Product::getPrice));
-                break;
-            case "priceHighToLow":
-                products.sort((a, b) -> Double.compare(b.getPrice(), a.getPrice()));
-                break;
-            case "nameAsc":
-                products.sort(Comparator.comparing(
-                        Product::getName,
-                        String.CASE_INSENSITIVE_ORDER
-                ));
-                break;
-            case "nameDesc":
-                products.sort(Comparator.comparing(
-                        Product::getName,
-                        String.CASE_INSENSITIVE_ORDER
-                ).reversed());
-                break;
-            default:
-                break;
-        }
     }
 
     // ===== GET BY ID =====
