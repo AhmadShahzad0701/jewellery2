@@ -29,20 +29,13 @@ public class CartService {
                 .orElseThrow(() -> new IllegalArgumentException("Cart not found or is empty."));
     }
 
-    /**
-     * Refactoring: Split Method.
-     * The business logic (clearItems) is in the Model.
-     * The persistence logic (save) is here in the Service.
-     */
+    
     public void clearCart(Cart cart) {
         cart.clearItems(); 
         cartRepository.save(cart);
     }
 
-    /**
-     * Refactoring: Move Method.
-     * Coordinates between Cart items and Product repository to build detailed views.
-     */
+  
     public List<Map<String, Object>> getCartItemsWithDetails(Cart cart) {
         List<CartItem> items = cart.getItems();
         if (items == null || items.isEmpty()) return new ArrayList<>();

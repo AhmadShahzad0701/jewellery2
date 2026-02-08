@@ -30,7 +30,7 @@ public class CartController {
 
     /**
      * EXTRACTED HELPER METHOD
-     * Centralizes the logic for retrieving or creating a cart.
+     * Logic for retrieving or creating a cart.
      * Prevents duplication in getCart and addToCart.
      */
     private Cart getOrCreateCart(String userId) {
@@ -67,7 +67,7 @@ public class CartController {
         if (existingItemOpt.isPresent()) {
             CartItem item = existingItemOpt.get();
             item.setQuantity(item.getQuantity() + quantity);
-            // In a real app, you might check if grams/price changed before overwriting
+            
             item.setGrams(grams);
             item.setFinalPrice(finalPrice);
         } else {
@@ -130,7 +130,7 @@ public class CartController {
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
-    // ADMIN CRUD
+    
 
     @GetMapping
     public List<Cart> getAllCarts() {
@@ -141,9 +141,7 @@ public class CartController {
     public ResponseEntity<String> clearCart(@PathVariable String userId) {
         Optional<Cart> cartOpt = cartRepository.findByUserId(userId);
         if (cartOpt.isPresent()) {
-            // Note: If you want to use the "clear items" strategy we discussed earlier,
-            // you would call cart.clearItems() here instead of delete().
-            // For now, I'm keeping your provided delete logic.
+            
             cartRepository.delete(cartOpt.get());
             return ResponseEntity.ok("Cart cleared for user: " + userId);
         } else {

@@ -18,7 +18,7 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     public Order createAndSaveOrder(String userId, Cart cart, double paidAmount, DeliveryDetails delivery) {
-        // Map CartItems to the Order's structure
+        
         List<String> orderProductIds = cart.getItems().stream()
                 .map(CartItem::getProductId)
                 .collect(Collectors.toList());

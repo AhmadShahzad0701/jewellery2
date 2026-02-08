@@ -41,7 +41,7 @@ public class CheckoutService {
         double discount = request.getDiscount() != null ? request.getDiscount() : 0.0;
         double finalTotal = Math.max(totalAmount - discount, 0);
 
-        // Delegate to OrderService
+        
         Order savedOrder = orderService.createAndSaveOrder(
                 request.getUserId(),
                 cart,
@@ -49,10 +49,10 @@ public class CheckoutService {
                 request.getDelivery()
         );
 
-        // Retrieve items for the invoice before clearing
+        
         List<Map<String, Object>> invoiceItems = cartService.getCartItemsWithDetails(cart);
 
-        // Use CartService to handle persistence of clearing the cart
+        
         cartService.clearCart(cart);
 
         return createInvoiceResponse(savedOrder, discount, invoiceItems, request.getDelivery());
