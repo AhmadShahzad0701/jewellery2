@@ -1,11 +1,50 @@
-How to open admin dashboard?
-1. Login with admin@gmail.com and user1
-2. Open /admin
+JewelleryMart – Help Guide
+==========================
 
-How to run backend
-$env:JAVA_HOME="C:\Program Files\Java\jdk-19"
->> .\mvnw.cmd spring-boot:run
+This document explains how to run the JewelleryMart project and access key features.
 
-How to run frontend
-cd client
-npm run dev
+--------------------------------------------------
+ADMIN DASHBOARD ACCESS
+--------------------------------------------------
+1. Login using:
+   Email: admin@gmail.com
+   Password: user1
+
+2. After login, open the admin dashboard:
+   /admin
+
+--------------------------------------------------
+HOW TO RUN BACKEND
+--------------------------------------------------
+1. Install Java JDK 19
+
+2. Set JAVA_HOME (Windows PowerShell):
+   $env:JAVA_HOME="C:\Program Files\Java\jdk-19"
+
+3. From project root directory, run:
+   .\mvnw.cmd spring-boot:run
+
+Backend will run on:
+http://localhost:8080
+
+--------------------------------------------------
+HOW TO RUN FRONTEND
+--------------------------------------------------
+1. Navigate to client folder:
+   cd client
+
+2. Install dependencies:
+   npm install
+
+3. Run frontend server:
+   npm run dev
+
+Frontend will be available at:
+http://localhost:5173
+
+--------------------------------------------------
+NOTES
+--------------------------------------------------
+- Make sure backend is running before using frontend
+- MongoDB must be available for full functionality
+- This project focuses on Software Reengineering concepts
