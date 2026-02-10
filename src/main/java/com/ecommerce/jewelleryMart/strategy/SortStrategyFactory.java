@@ -15,9 +15,10 @@ public class SortStrategyFactory {
     }
 
     public static SortStrategy getStrategy(String sort) {
-        if (sort == null) {
-            return null;
+        // Defensive programming to avoid runtime failure
+        if (sort == null || !STRATEGIES.containsKey(sort)) {
+            return STRATEGIES.get("priceLowToHigh"); // safe default
         }
-        return STRATEGIES.get(sort);
+    return STRATEGIES.get(sort);
     }
 }
